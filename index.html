@@ -85,28 +85,53 @@
             display: flex;
             justify-content: space-between;
             margin-top: 20px;
+            flex-wrap: wrap;
         }
-        .linkedin, .contact {
+        .linkedin, .contact, .status {
             flex: 1;
             text-align: center;
             padding: 20px;
             background-color: #21262d;
             color: #c9d1d9;
             border-radius: 6px;
-            margin: 0 10px;
+            margin: 10px 5px;
             transition: background-color 0.3s;
+            min-width: 250px;
         }
-        .linkedin:hover, .contact:hover {
+        .linkedin:hover, .contact:hover, .status:hover {
             background-color: #30363d;
         }
-        .linkedin a, .contact a {
+        .linkedin a, .contact a, .status a {
             color: #58a6ff;
             text-decoration: none;
             font-weight: bold;
             transition: color 0.3s;
         }
-        .linkedin a:hover, .contact a:hover {
+        .linkedin a:hover, .contact a:hover, .status a:hover {
             color: #c9d1d9;
+        }
+        @media (max-width: 600px) {
+            .header img {
+                width: 100px;
+                height: 100px;
+            }
+            .header h1 {
+                font-size: 1.5em;
+            }
+            .header h2 {
+                font-size: 1em;
+            }
+            .linkedin, .contact, .status {
+                padding: 10px;
+                margin: 5px 0;
+            }
+            .section h2 {
+                font-size: 1.2em;
+            }
+            .skills li {
+                padding: 3px 5px;
+                margin: 3px;
+            }
         }
     </style>
 </head>
@@ -128,6 +153,9 @@
                 </div>
                 <div class="contact">
                     <p>Voor vragen of meer informatie, neem contact op via e-mail: <a href="mailto:info@joeymeijer.nl">info@joeymeijer.nl</a></p>
+                </div>
+                <div class="status">
+                    <p>Bekijk mijn statuspagina: <a href="https://joeymeijer.statuspage.io" target="_blank">joeymeijer.statuspage.io</a></p>
                 </div>
             </div>
         </div>
