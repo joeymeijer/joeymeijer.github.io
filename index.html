@@ -81,29 +81,32 @@
             border-radius: 3px;
             margin: 5px;
         }
-        .contact {
+        .bottom-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .linkedin, .contact {
+            flex: 1;
             text-align: center;
             padding: 20px;
             background-color: #21262d;
             color: #c9d1d9;
             border-radius: 6px;
+            margin: 0 10px;
+            transition: background-color 0.3s;
         }
-        .contact a {
+        .linkedin:hover, .contact:hover {
+            background-color: #30363d;
+        }
+        .linkedin a, .contact a {
             color: #58a6ff;
             text-decoration: none;
             font-weight: bold;
+            transition: color 0.3s;
         }
-        .linkedin {
-            text-align: center;
-            padding: 20px;
-            background-color: #21262d;
+        .linkedin a:hover, .contact a:hover {
             color: #c9d1d9;
-            border-radius: 6px;
-        }
-        .linkedin a {
-            color: #58a6ff;
-            text-decoration: none;
-            font-weight: bold;
         }
     </style>
 </head>
@@ -119,8 +122,14 @@
                 <h2>Over Mij</h2>
                 <p>Ik ben een gedreven IT-specialist met ervaring in automatisering, netwerkbeheer, en IT-ondersteuning. Mijn passie ligt in het vinden van innovatieve oplossingen voor complexe IT-uitdagingen.</p>
             </div>
-        <div class="linkedin">
-            <p>Bekijk mijn LinkedIn-profiel: <a href="https://www.linkedin.com/in/joeymeijer/" target="_blank">linkedin.com/in/joeymeijer</a></p>
+            <div class="bottom-section">
+                <div class="linkedin">
+                    <p>Bekijk mijn LinkedIn-profiel: <a href="https://www.linkedin.com/in/joeymeijer/" target="_blank">linkedin.com/in/joeymeijer</a></p>
+                </div>
+                <div class="contact">
+                    <p>Voor vragen of meer informatie, neem contact op via e-mail: <a href="mailto:info@joeymeijer.nl">info@joeymeijer.nl</a></p>
+                </div>
+            </div>
         </div>
     </div>
 </body>
