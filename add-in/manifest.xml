@@ -11,7 +11,7 @@
        Replace the Id GUID with a newly generated one if
        you fork this add-in for a different deployment.
   ═══════════════════════════════════════════════════════ -->
-  <Id>a1b2c3d4-e5f6-7890-abcd-ef1234567890</Id>
+  <Id>ec06fb1c-bd46-4d4b-9c54-be5be9301eab</Id>
   <Version>1.0.0.0</Version>
   <ProviderName>Joeymeijer.nl</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
