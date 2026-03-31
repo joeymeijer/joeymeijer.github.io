@@ -43,7 +43,7 @@
   <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
 
     <Requirements>
-      <bt:Sets DefaultMinVersion="1.3">
+      <bt:Sets DefaultMinVersion="1.5">
         <bt:Set Name="Mailbox" />
       </bt:Sets>
     </Requirements>
@@ -53,9 +53,6 @@
 
         <!-- ── Desktop Outlook ──────────────────────── -->
         <DesktopFormFactor>
-
-          <!-- Function file (ribbon command handler) -->
-          <FunctionFile resid="Commands.Url" />
 
           <!-- Compose message extension point (adds our ribbon button) -->
           <ExtensionPoint xsi:type="MessageComposeCommandSurface">
@@ -101,7 +98,6 @@
       </bt:Images>
 
       <bt:Urls>
-        <bt:Url id="Commands.Url"  DefaultValue="https://joeymeijer.nl/add-in/commands.html" />
         <bt:Url id="Taskpane.Url"  DefaultValue="https://joeymeijer.nl/add-in/taskpane.html" />
       </bt:Urls>
 
