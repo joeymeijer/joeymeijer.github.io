@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Send Securely — Hemmelig</title>
+
+  <!-- Office JS -->
+  <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap');
+
+    :root {
+      --bg:       #0c0e14;
+      --surface:  #13151f;
+      --border:   #1e2230;
+      --border2:  #252839;
+      --gold:     #e8a020;
+      --gold-dim: #9a6a14;
+      --text:     #d4d8e8;
+      --muted:    #5a6080;
+      --danger:   #e05050;
+      --success:  #3eb87a;
+      --radius:   8px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    /* ── Layout ────────────────────────────── */
+    #app {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* ── Header ────────────────────────────── */
+    header {
+      padding: 14px 16px 12px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .logo-mark {
+      width: 28px;
+      height: 28px;
+      background: var(--gold);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 14px;
+      font-weight: 500;
+      color: #0c0e14;
+      flex-shrink: 0;
+    }
+
+    .header-text h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.02em;
+    }
+
+    .header-text p {
+      font-size: 10px;
+      color: var(--muted);
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .header-actions {
+      margin-left: auto;
+    }
+
+    .btn-icon {
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 4px 6px;
+      border-radius: 4px;
+      font-size: 14px;
+      transition: color .2s, background .2s;
+    }
+    .btn-icon:hover { color: var(--text); background: var(--border); }
+
+    /* ── Tabs ──────────────────────────────── */
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .tab {
+      flex: 1;
+      padding: 9px 0;
+      text-align: center;
+      font-size: 11px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: color .2s, border-color .2s;
+    }
+
+    .tab.active {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+
+    /* ── Panels ────────────────────────────── */
+    .panel { display: none; flex-direction: column; flex: 1; overflow: hidden; }
+    .panel.active { display: flex; }
+
+    .scroll-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px 16px;
+    }
+
+    .scroll-area::-webkit-scrollbar { width: 4px; }
+    .scroll-area::-webkit-scrollbar-track { background: transparent; }
+    .scroll-area::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+    /* ── Field groups ──────────────────────── */
+    .field-group {
+      margin-bottom: 14px;
+    }
+
+    label {
+      display: block;
+      font-size: 10px;
+      font-family: 'IBM Plex Mono', monospace;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    textarea,
+    select {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      padding: 8px 10px;
+      outline: none;
+      transition: border-color .2s;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--gold-dim);
+    }
+
+    textarea { resize: none; height: 110px; }
+
+    select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a6080' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      padding-right: 28px;
+      cursor: pointer;
+    }
+
+    select option { background: var(--surface); }
+
+    /* ── TTL pills ─────────────────────────── */
+    .pill-group {
+      display: flex;
+      gap: 6px;
+    }
+
+    .pill {
+      flex: 1;
+      text-align: center;
+      padding: 7px 4px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .pill.selected {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(232,160,32,0.08);
+    }
+
+    /* ── Email preview ─────────────────────── */
+    .email-preview {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .preview-header {
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .preview-meta {
+      font-size: 10px;
+      color: var(--muted);
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .preview-meta span { color: var(--text); }
+
+    .preview-body {
+      padding: 10px;
+      font-size: 11px;
+      color: var(--muted);
+      max-height: 120px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .preview-body::-webkit-scrollbar { width: 3px; }
+    .preview-body::-webkit-scrollbar-thumb { background: var(--border2); }
+
+    /* ── Divider ───────────────────────────── */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 14px 0;
+    }
+
+    /* ── Status banner ─────────────────────── */
+    .status-banner {
+      margin: 0 16px 12px;
+      padding: 8px 12px;
+      border-radius: var(--radius);
+      font-size: 11px;
+      display: none;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .status-banner.show { display: flex; }
+
+    .status-banner.error {
+      background: rgba(224,80,80,0.12);
+      border: 1px solid rgba(224,80,80,0.3);
+      color: #f08080;
+    }
+
+    .status-banner.success {
+      background: rgba(62,184,122,0.12);
+      border: 1px solid rgba(62,184,122,0.3);
+      color: #6de4a8;
+    }
+
+    .status-banner.info {
+      background: rgba(232,160,32,0.10);
+      border: 1px solid rgba(232,160,32,0.25);
+      color: var(--gold);
+    }
+
+    .status-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+    .status-text { flex: 1; line-height: 1.4; }
+    .status-text strong { display: block; margin-bottom: 2px; }
+
+    /* ── Secret link display ───────────────── */
+    .secret-link-box {
+      display: none;
+      margin: 0 16px 12px;
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .secret-link-box.show { display: block; }
+
+    .link-label {
+      padding: 6px 10px;
+      background: rgba(232,160,32,0.08);
+      border-bottom: 1px solid var(--border);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    .link-value {
+      padding: 8px 10px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      color: var(--text);
+      word-break: break-all;
+      line-height: 1.5;
+    }
+
+    .link-actions {
+      padding: 6px 10px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 6px;
+    }
+
+    .btn-sm {
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 10px;
+      font-family: 'IBM Plex Mono', monospace;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--muted);
+      transition: all .15s;
+    }
+
+    .btn-sm:hover { border-color: var(--border2); color: var(--text); }
+    .btn-sm.gold { border-color: var(--gold-dim); color: var(--gold); background: rgba(232,160,32,0.07); }
+    .btn-sm.gold:hover { background: rgba(232,160,32,0.14); }
+
+    /* ── Bottom action bar ─────────────────── */
+    .action-bar {
+      padding: 12px 16px;
+      border-top: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .btn-primary {
+      width: 100%;
+      padding: 11px;
+      background: var(--gold);
+      color: #0c0e14;
+      border: none;
+      border-radius: var(--radius);
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: background .2s, opacity .2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+    }
+
+    .btn-primary:hover { background: #f0b030; }
+    .btn-primary:disabled { opacity: .45; cursor: not-allowed; }
+
+    .btn-primary .spinner {
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(0,0,0,0.3);
+      border-top-color: #0c0e14;
+      border-radius: 50%;
+      animation: spin .6s linear infinite;
+      display: none;
+    }
+
+    .btn-primary.loading .spinner { display: block; }
+    .btn-primary.loading .btn-label { display: none; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Settings panel ────────────────────── */
+    .settings-note {
+      font-size: 10px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-top: 5px;
+    }
+
+    .copy-feedback {
+      transition: color .3s;
+    }
+
+    /* ── Password option ───────────────────── */
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .toggle-label {
+      font-size: 11px;
+      color: var(--text);
+    }
+
+    .toggle {
+      position: relative;
+      width: 32px;
+      height: 18px;
+    }
+
+    .toggle input { display: none; }
+
+    .toggle-track {
+      position: absolute;
+      inset: 0;
+      background: var(--border);
+      border-radius: 9px;
+      cursor: pointer;
+      transition: background .2s;
+    }
+
+    .toggle input:checked + .toggle-track { background: var(--gold-dim); }
+
+    .toggle-thumb {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 12px;
+      height: 12px;
+      background: #fff;
+      border-radius: 50%;
+      transition: transform .2s;
+      pointer-events: none;
+    }
+
+    .toggle input:checked ~ .toggle-thumb { transform: translateX(14px); }
+
+    .optional-field {
+      display: none;
+    }
+    .optional-field.show { display: block; }
+
+    /* ── Info chip ─────────────────────────── */
+    .info-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 7px;
+      background: rgba(62,184,122,0.1);
+      border: 1px solid rgba(62,184,122,0.25);
+      border-radius: 20px;
+      font-size: 9px;
+      font-family: 'IBM Plex Mono', monospace;
+      color: var(--success);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+
+  <!-- Header -->
+  <header>
+    <div class="logo-mark">🔒</div>
+    <div class="header-text">
+      <h1>Send Securely</h1>
+      <p>secret.joeymeijer.nl</p>
+    </div>
+    <div class="header-actions">
+      <button class="btn-icon" onclick="switchTab('settings')" title="Settings">⚙</button>
+    </div>
+  </header>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab active" id="tab-compose" onclick="switchTab('compose')">Compose</button>
+    <button class="tab" id="tab-settings" onclick="switchTab('settings')">Settings</button>
+  </div>
+
+  <!-- COMPOSE PANEL -->
+  <div class="panel active" id="panel-compose">
+    <div class="scroll-area">
+
+      <!-- Email preview -->
+      <div class="field-group">
+        <label>Email Content Preview</label>
+        <div class="email-preview">
+          <div class="preview-header">
+            <div class="preview-meta">To: <span id="prev-to">—</span></div>
+            <div class="preview-meta">Subject: <span id="prev-subject">—</span></div>
+          </div>
+          <div class="preview-body" id="prev-body">Loading email content…</div>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <!-- TTL -->
+      <div class="field-group">
+        <label>Secret Expires After</label>
+        <div class="pill-group">
+          <div class="pill" data-ttl="86400" onclick="selectTtl(this)">1 Day</div>
+          <div class="pill selected" data-ttl="604800" onclick="selectTtl(this)">7 Days</div>
+          <div class="pill" data-ttl="2592000" onclick="selectTtl(this)">30 Days</div>
+        </div>
+      </div>
+
+      <!-- Optional password -->
+      <div class="field-group">
+        <div class="toggle-row">
+          <span class="toggle-label">Password-protect the secret</span>
+          <label class="toggle">
+            <input type="checkbox" id="pw-toggle" onchange="togglePassword(this)" />
+            <div class="toggle-track"></div>
+            <div class="toggle-thumb"></div>
+          </label>
+        </div>
+        <div class="optional-field" id="pw-field">
+          <input type="password" id="secret-password" placeholder="Enter a passphrase…" autocomplete="new-password" />
+          <p class="settings-note" style="margin-top:5px;">Recipient will need this passphrase to view the secret.</p>
+        </div>
+      </div>
+
+      <!-- Burn after reading -->
+      <div class="field-group">
+        <div class="toggle-row">
+          <span class="toggle-label">Burn after reading</span>
+          <label class="toggle">
+            <input type="checkbox" id="burn-toggle" checked />
+            <div class="toggle-track"></div>
+            <div class="toggle-thumb"></div>
+          </label>
+        </div>
+        <p class="settings-note">Secret is destroyed after first view.</p>
+      </div>
+
+    </div>
+
+    <!-- Status & result -->
+    <div class="status-banner" id="status-banner">
+      <div class="status-icon" id="status-icon"></div>
+      <div class="status-text" id="status-text"></div>
+    </div>
+
+    <div class="secret-link-box" id="link-box">
+      <div class="link-label">🔗 Secret Link Generated</div>
+      <div class="link-value" id="link-value"></div>
+      <div class="link-actions">
+        <button class="btn-sm gold" onclick="copyLink()">Copy Link</button>
+        <button class="btn-sm" onclick="injectIntoEmail()">Replace Email Body</button>
+      </div>
+    </div>
+
+    <!-- Action -->
+    <div class="action-bar">
+      <button class="btn-primary" id="send-btn" onclick="handleSendSecurely()">
+        <div class="spinner"></div>
+        <span class="btn-label">🔒 &nbsp;Send Securely</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- SETTINGS PANEL -->
+  <div class="panel" id="panel-settings">
+    <div class="scroll-area">
+
+      <div class="field-group">
+        <label>Hemmelig Server URL</label>
+        <input type="text" id="cfg-server" value="https://secret.joeymeijer.nl" placeholder="https://secret.joeymeijer.nl" />
+        <p class="settings-note" style="margin-top:5px;">Your self-hosted Hemmelig instance.</p>
+      </div>
+
+      <div class="field-group">
+        <label>API Token</label>
+        <input type="password" id="cfg-token" placeholder="Paste your Hemmelig API token…" />
+        <p class="settings-note" style="margin-top:5px;">Found in your Hemmelig account settings. Stored locally in your browser.</p>
+      </div>
+
+      <div class="field-group">
+        <label>Email Template</label>
+        <textarea id="cfg-template" style="height:90px;">Hi,
+
+Please find your secure information via the link below. This link will expire after {expiry} and can only be read once.
+
+🔗 {link}
+
+This message was sent securely using Hemmelig.</textarea>
+        <p class="settings-note" style="margin-top:5px;">Use <code style="background:var(--surface);padding:1px 4px;border-radius:3px;font-family:'IBM Plex Mono',monospace;">{link}</code> and <code style="background:var(--surface);padding:1px 4px;border-radius:3px;font-family:'IBM Plex Mono',monospace;">{expiry}</code> as placeholders.</p>
+      </div>
+
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+        <label style="margin:0;">Connection Status</label>
+        <div class="info-chip" id="conn-status">● Not Tested</div>
+      </div>
+      <button class="btn-sm gold" style="width:100%;text-align:center;padding:8px;" onclick="testConnection()">Test Connection</button>
+
+    </div>
+
+    <div class="action-bar">
+      <button class="btn-primary" onclick="saveSettings()">
+        <span class="btn-label">Save Settings</span>
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<script src="taskpane.js"></script>
+</body>
+</html>
