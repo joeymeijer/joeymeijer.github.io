@@ -1,165 +1,203 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joey Meijer - IT Specialist</title>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'JetBrains Mono', monospace;
-            background-color: #0d1117;
-            color: #c9d1d9;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 6px;
-            box-shadow: 0 1px 3px rgba(27, 31, 35, 0.12);
-        }
-        .header {
-            text-align: center;
-            padding: 20px 0;
-        }
-        .header img {
-            border-radius: 50%;
-            width: 150px;
-            height: 150px;
-            border: 2px solid #c9d1d9;
-        }
-        .header h1 {
-            margin: 10px 0 5px;
-            font-size: 2em;
-            color: #58a6ff;
-        }
-        .header h2 {
-            margin: 5px 0;
-            color: #8b949e;
-            font-weight: normal;
-        }
-        .content {
-            padding: 20px 0;
-        }
-        .section {
-            margin-bottom: 20px;
-        }
-        .section h2 {
-            border-bottom: 1px solid #30363d;
-            padding-bottom: 10px;
-            font-size: 1.5em;
-            color: #58a6ff;
-        }
-        .section ul {
-            list-style: none;
-            padding: 0;
-        }
-        .section ul li {
-            padding: 10px 0;
-            border-bottom: 1px solid #30363d;
-        }
-        .section ul li:last-child {
-            border-bottom: none;
-        }
-        .section ul li h3 {
-            margin: 0;
-            font-size: 1.2em;
-            color: #58a6ff;
-        }
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-        }
-        .skills li {
-            background-color: #238636;
-            color: #fff;
-            padding: 5px 10px;
-            border-radius: 3px;
-            margin: 5px;
-        }
-        .bottom-section {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-        .linkedin, .contact, .status {
-            flex: 1;
-            text-align: center;
-            padding: 20px;
-            background-color: #21262d;
-            color: #c9d1d9;
-            border-radius: 6px;
-            margin: 10px 5px;
-            transition: background-color 0.3s;
-            min-width: 250px;
-        }
-        .linkedin:hover, .contact:hover, .status:hover {
-            background-color: #30363d;
-        }
-        .linkedin a, .contact a, .status a {
-            color: #58a6ff;
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-        .linkedin a:hover, .contact a:hover, .status a:hover {
-            color: #c9d1d9;
-        }
-        @media (max-width: 600px) {
-            .header img {
-                width: 100px;
-                height: 100px;
-            }
-            .header h1 {
-                font-size: 1.5em;
-            }
-            .header h2 {
-                font-size: 1em;
-            }
-            .linkedin, .contact, .status {
-                padding: 10px;
-                margin: 5px 0;
-            }
-            .section h2 {
-                font-size: 1.2em;
-            }
-            .skills li {
-                padding: 3px 5px;
-                margin: 3px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <img src="pf.jpeg" alt="Profielfoto">
-            <h1>Joey Meijer</h1>
-            <h2>IT-System Engineer</h2>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Joey Meijer | IT-System Engineer</title>
+    <meta
+      name="description"
+      content="Portfolio van Joey Meijer, IT-System Engineer gespecialiseerd in automatisering, netwerkbeheer en IT-ondersteuning."
+    />
+    <meta property="og:title" content="Joey Meijer | IT-System Engineer" />
+    <meta
+      property="og:description"
+      content="Professioneel portfolio voor automatisering, netwerkbeheer en IT-ondersteuning."
+    />
+    <meta property="og:image" content="/portfolio-hero.png" />
+    <meta property="og:type" content="website" />
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="preload" as="image" href="/portfolio-hero.png" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav" aria-label="Hoofdnavigatie">
+        <a class="brand" href="#top">Joey Meijer</a>
+        <div class="nav-links">
+          <a href="#expertise">Expertise</a>
+          <a href="#portfolio">Portfolio</a>
+          <a href="#contact">Contact</a>
         </div>
-        <div class="content">
-            <div class="section">
-                <h2>Over Mij</h2>
-                <p>Ik ben een gedreven IT-System Engineer met ervaring in automatisering, netwerkbeheer, en IT-ondersteuning. Mijn passie ligt in het vinden van innovatieve oplossingen voor complexe IT-uitdagingen.</p>
-            </div>
-            <div class="bottom-section">
-                <div class="linkedin">
-                    <p>Bekijk mijn LinkedIn-profiel: <a href="https://www.linkedin.com/in/joeymeijer/" target="_blank">linkedin.com/in/joeymeijer</a></p>
-                </div>
-                <div class="contact">
-                    <p>Voor vragen of meer informatie, neem contact op via e-mail: <a href="mailto:info@joeymeijer.nl">info@joeymeijer.nl</a></p>
-                </div>
-                <div class="status">
-                    <p>Bekijk mijn statuspagina: <a href="https://joeymeijer.statuspage.io" target="_blank">joeymeijer.statuspage.io</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
+        <a class="nav-action" href="mailto:info@joeymeijer.nl">Mail</a>
+      </nav>
+    </header>
 
+    <main>
+      <section id="top" class="hero">
+        <img class="hero-image" src="/portfolio-hero.png" alt="" />
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <p class="eyebrow hero-eyebrow">IT-System Engineer</p>
+          <h1>Joey Meijer</h1>
+          <p class="hero-copy">
+            Gedreven IT-System Engineer met ervaring in automatisering,
+            netwerkbeheer en IT-ondersteuning. Ik maak complexe IT-uitdagingen
+            overzichtelijk en vertaal ze naar praktische, duurzame oplossingen.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="mailto:info@joeymeijer.nl">
+              Neem contact op
+            </a>
+            <a
+              class="button button-secondary"
+              href="https://www.linkedin.com/in/joeymeijer"
+            >
+              LinkedIn-profiel
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="summary-band" aria-label="Profiel in het kort">
+        <div class="summary-grid">
+          <div>
+            <p class="summary-label">Focus</p>
+            <p>Automatisering, beheer en support</p>
+          </div>
+          <div>
+            <p class="summary-label">Werkwijze</p>
+            <p>Nuchter, precies en documenterend</p>
+          </div>
+          <div>
+            <p class="summary-label">Contact</p>
+            <p>info@joeymeijer.nl</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="expertise" class="section">
+        <div class="section-inner">
+          <div class="section-heading">
+            <p class="eyebrow">Expertise</p>
+            <h2>Praktische techniek voor betrouwbare IT-omgevingen.</h2>
+          </div>
+          <div class="expertise-grid">
+            <article class="card">
+              <p class="card-label">Automatisering</p>
+              <h3>Herhaalbaar beheer in plaats van handwerk</h3>
+              <p>
+                Ik breng terugkerende IT-taken terug naar duidelijke processen,
+                scripts en controles zodat beheer voorspelbaar blijft.
+              </p>
+            </article>
+            <article class="card">
+              <p class="card-label">Netwerkbeheer</p>
+              <h3>Stabiele verbindingen en overzicht</h3>
+              <p>
+                Van dagelijkse netwerkvragen tot structurele verbeteringen: ik
+                werk aan omgevingen die logisch zijn ingericht en goed te volgen
+                zijn.
+              </p>
+            </article>
+            <article class="card">
+              <p class="card-label">IT-ondersteuning</p>
+              <h3>Support met oog voor de oorzaak</h3>
+              <p>
+                Incidenten oplossen is stap een. De waarde zit in documenteren,
+                verbeteren en voorkomen dat hetzelfde probleem terugkomt.
+              </p>
+            </article>
+            <article class="card">
+              <p class="card-label">Monitoring</p>
+              <h3>Zicht op beschikbaarheid</h3>
+              <p>
+                Status, signalen en duidelijke communicatie helpen om sneller te
+                reageren en vertrouwen te houden in kritieke systemen.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="portfolio" class="portfolio-section">
+        <div class="portfolio-inner">
+          <div class="portfolio-copy">
+            <p class="eyebrow teal">Portfolio</p>
+            <h2>Werk dat draait om stabiliteit, overzicht en verbetering.</h2>
+            <p>
+              Deze portfolio-indeling laat ruimte om later concrete projecten,
+              resultaten en gebruikte tooling toe te voegen. Nu presenteert de
+              site helder waar jouw profiel sterk in is.
+            </p>
+          </div>
+          <div class="theme-list" aria-label="Portfolio thema's">
+            <div>Automatiseren van terugkerende beheerhandelingen</div>
+            <div>Verbeteren van netwerk- en systeemdocumentatie</div>
+            <div>Ondersteunen van gebruikers met structurele oplossingen</div>
+            <div>Inrichten van monitoring en statuscommunicatie</div>
+            <div>Analyseren van complexe IT-vraagstukken</div>
+            <div>Vertalen van technische keuzes naar praktische stappen</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="about-section">
+        <div class="about-inner">
+          <div>
+            <p class="eyebrow">Over mij</p>
+            <h2>Een engineer die zoekt naar de oplossing achter de vraag.</h2>
+          </div>
+          <div class="about-copy">
+            <p>
+              Mijn passie ligt in het vinden van innovatieve oplossingen voor
+              complexe IT-uitdagingen. Ik werk graag aan systemen die niet alleen
+              vandaag functioneren, maar morgen ook begrijpelijk en onderhoudbaar
+              blijven.
+            </p>
+            <p>
+              In beheer, support en netwerkvraagstukken combineer ik technische
+              analyse met duidelijke communicatie. Zo wordt IT minder reactief en
+              ontstaat er ruimte om structureel te verbeteren.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="principles-section" aria-label="Aanpak">
+        <div class="section-inner">
+          <p class="eyebrow">Aanpak</p>
+          <div class="principles-grid">
+            <div>Duidelijke analyse voordat er wordt gewijzigd</div>
+            <div>Oplossingen die beheerbaar blijven na oplevering</div>
+            <div>Rustige communicatie tijdens incidenten</div>
+            <div>Documentatie die collega's echt kunnen gebruiken</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="contact-section">
+        <div class="contact-inner">
+          <div>
+            <p class="eyebrow">Contact</p>
+            <h2>Vragen of meer informatie?</h2>
+            <p>
+              Neem contact op via e-mail of bekijk mijn LinkedIn-profiel voor
+              meer achtergrond.
+            </p>
+          </div>
+          <div class="contact-actions">
+            <a class="button button-primary-dark" href="mailto:info@joeymeijer.nl">
+              info@joeymeijer.nl
+            </a>
+            <a
+              class="button button-outline"
+              href="https://www.linkedin.com/in/joeymeijer"
+            >
+              LinkedIn
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
